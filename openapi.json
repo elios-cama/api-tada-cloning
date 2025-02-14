@@ -6,14 +6,14 @@
         "version": "v1"
     },
     "paths": {
-        "/api/register": {
+        "/api/users/register": {
             "post": {
                 "tags": [
                     "API"
                 ],
                 "summary": "Register User",
                 "description": "Registers a new user and generates an API key.",
-                "operationId": "register_user_api_register_post",
+                "operationId": "register_user_api_users_register_post",
                 "parameters": [
                     {
                         "name": "email",
@@ -47,6 +47,147 @@
                 }
             }
         },
+        "/api/voices/uploads/url": {
+            "post": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Create Voice Upload Url",
+                "description": "Generates a Supabase Storage upload URL for voice training data.",
+                "operationId": "create_voice_upload_url_api_voices_uploads_url_post",
+                "security": [
+                    {
+                        "APIKeyHeader": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Name of the voice clone",
+                            "title": "Name"
+                        },
+                        "description": "Name of the voice clone"
+                    },
+                    {
+                        "name": "file_name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Name of the file to upload",
+                            "title": "File Name"
+                        },
+                        "description": "Name of the file to upload"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "title": "Response Create Voice Upload Url Api Voices Uploads Url Post"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/voices/uploads": {
+            "post": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Create Voice",
+                "description": "Create a new voice",
+                "operationId": "create_voice_api_voices_uploads_post",
+                "security": [
+                    {
+                        "APIKeyHeader": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "upload_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Upload ID",
+                            "title": "Upload Id"
+                        },
+                        "description": "Upload ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VoiceClone"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "List Voice Uploads",
+                "description": "Get all voice uploads.",
+                "operationId": "list_voice_uploads_api_voices_uploads_get",
+                "security": [
+                    {
+                        "APIKeyHeader": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/VoiceUpload"
+                                    },
+                                    "title": "Response List Voice Uploads Api Voices Uploads Get"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/voices": {
             "get": {
                 "tags": [
@@ -66,51 +207,6 @@
                                     },
                                     "type": "array",
                                     "title": "Response List Voices Api Voices Get"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "APIKeyHeader": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "API"
-                ],
-                "summary": "Create Voice",
-                "description": "Create a new voice",
-                "operationId": "create_voice_api_voices_post",
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Body_create_voice_api_voices_post"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/VoiceClone"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
                                 }
                             }
                         }
@@ -171,77 +267,14 @@
                 }
             }
         },
-        "/api/voices/generations": {
-            "get": {
-                "tags": [
-                    "API"
-                ],
-                "summary": "List All Voice Generations",
-                "description": "Get all voice generations",
-                "operationId": "list_all_voice_generations_api_voices_generations_get",
-                "security": [
-                    {
-                        "APIKeyHeader": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "description": "Number of generations to return",
-                            "default": 20,
-                            "title": "Limit"
-                        },
-                        "description": "Number of generations to return"
-                    },
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "description": "Offset for pagination",
-                            "default": 0,
-                            "title": "Offset"
-                        },
-                        "description": "Offset for pagination"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/VoiceGenerationList"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/voices/{voice_id}/generations": {
+        "/api/voices/generations/{voice_id}": {
             "post": {
                 "tags": [
                     "API"
                 ],
                 "summary": "Create Voice Generation",
                 "description": "Generate speech using a specific voice",
-                "operationId": "create_voice_generation_api_voices__voice_id__generations_post",
+                "operationId": "create_voice_generation_api_voices_generations__voice_id__post",
                 "security": [
                     {
                         "APIKeyHeader": []
@@ -297,7 +330,7 @@
                 ],
                 "summary": "List Voice Generations By Voice",
                 "description": "Get all generations for a specific voice",
-                "operationId": "list_voice_generations_by_voice_api_voices__voice_id__generations_get",
+                "operationId": "list_voice_generations_by_voice_api_voices_generations__voice_id__get",
                 "security": [
                     {
                         "APIKeyHeader": []
@@ -313,6 +346,69 @@
                             "title": "Voice Id"
                         }
                     },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "description": "Number of generations to return",
+                            "default": 20,
+                            "title": "Limit"
+                        },
+                        "description": "Number of generations to return"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "description": "Offset for pagination",
+                            "default": 0,
+                            "title": "Offset"
+                        },
+                        "description": "Offset for pagination"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VoiceGenerationList"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/voices/generations": {
+            "get": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "List All Voice Generations",
+                "description": "Get all voice generations",
+                "operationId": "list_all_voice_generations_api_voices_generations_get",
+                "security": [
+                    {
+                        "APIKeyHeader": []
+                    }
+                ],
+                "parameters": [
                     {
                         "name": "limit",
                         "in": "query",
@@ -410,14 +506,14 @@
                 }
             }
         },
-        "/api/loras/upload-url": {
+        "/api/loras/uploads/url": {
             "post": {
                 "tags": [
                     "API"
                 ],
                 "summary": "Create Upload Url",
                 "description": "Generates a Supabase Storage upload URL.",
-                "operationId": "create_upload_url_api_loras_upload_url_post",
+                "operationId": "create_upload_url_api_loras_uploads_url_post",
                 "security": [
                     {
                         "APIKeyHeader": []
@@ -465,57 +561,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "title": "Response Create Upload Url Api Loras Upload Url Post"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/loras": {
-            "post": {
-                "tags": [
-                    "API"
-                ],
-                "summary": "Upload Lora Data",
-                "description": "Processes LoRA training data after it's been uploaded to Supabase Storage.",
-                "operationId": "upload_lora_data_api_loras_post",
-                "security": [
-                    {
-                        "APIKeyHeader": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "upload_id",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "description": "Upload ID",
-                            "title": "Upload Id"
-                        },
-                        "description": "Upload ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LoraUpload"
+                                    "title": "Response Create Upload Url Api Loras Uploads Url Post"
                                 }
                             }
                         }
@@ -564,62 +610,14 @@
                 ]
             }
         },
-        "/api/loras/uploads/{upload_id}": {
-            "get": {
-                "tags": [
-                    "API"
-                ],
-                "summary": "Get Lora Upload",
-                "description": "Get a specific LoRA upload.",
-                "operationId": "get_lora_upload_api_loras_uploads__upload_id__get",
-                "security": [
-                    {
-                        "APIKeyHeader": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "upload_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Upload Id"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LoraUpload"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/loras/{upload_id}/trainings": {
+        "/api/loras/trainings/{upload_id}": {
             "post": {
                 "tags": [
                     "API"
                 ],
                 "summary": "Train Lora",
                 "description": "Start LoRA training for a specific upload. Returns immediately when training job is created.",
-                "operationId": "train_lora_api_loras__upload_id__trainings_post",
+                "operationId": "train_lora_api_loras_trainings__upload_id__post",
                 "security": [
                     {
                         "APIKeyHeader": []
@@ -644,6 +642,52 @@
                         "content": {
                             "application/json": {
                                 "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Get Lora Status",
+                "description": "Get the status of a LoRA training job.",
+                "operationId": "get_lora_status_api_loras_trainings__upload_id__get",
+                "security": [
+                    {
+                        "APIKeyHeader": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "upload_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Upload Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoraTraining"
+                                }
                             }
                         }
                     },
@@ -721,105 +765,14 @@
                 }
             }
         },
-        "/api/loras/trainings/{training_id}": {
-            "get": {
-                "tags": [
-                    "API"
-                ],
-                "summary": "Get Lora Status",
-                "description": "Get the status of a LoRA training job.",
-                "operationId": "get_lora_status_api_loras_trainings__training_id__get",
-                "security": [
-                    {
-                        "APIKeyHeader": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "training_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "title": "Training Id"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/LoraTraining"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/loras/trainings/webhook": {
-            "post": {
-                "tags": [
-                    "API"
-                ],
-                "summary": "Webhook Handler",
-                "description": "Handle webhook events from the lora service",
-                "operationId": "webhook_handler_api_loras_trainings_webhook_post",
-                "parameters": [
-                    {
-                        "name": "training_id",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "description": "Training ID",
-                            "title": "Training Id"
-                        },
-                        "description": "Training ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/loras/generate/{training_id}": {
+        "/api/loras/generations/{upload_id}": {
             "post": {
                 "tags": [
                     "API"
                 ],
                 "summary": "Generate Lora",
                 "description": "Generate an image using a trained LoRA model.",
-                "operationId": "generate_lora_api_loras_generate__training_id__post",
+                "operationId": "generate_lora_api_loras_generations__upload_id__post",
                 "security": [
                     {
                         "APIKeyHeader": []
@@ -827,12 +780,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "training_id",
+                        "name": "upload_id",
                         "in": "path",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "title": "Training Id"
+                            "title": "Upload Id"
                         }
                     }
                 ],
@@ -852,6 +805,73 @@
                         "content": {
                             "application/json": {
                                 "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/loras/generations": {
+            "get": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "List All Generations",
+                "description": "Get all LoRA generations for the given API key.",
+                "operationId": "list_all_generations_api_loras_generations_get",
+                "security": [
+                    {
+                        "APIKeyHeader": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "description": "Number of generations to return",
+                            "default": 20,
+                            "title": "Limit"
+                        },
+                        "description": "Number of generations to return"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "description": "Offset for pagination",
+                            "default": 0,
+                            "title": "Offset"
+                        },
+                        "description": "Offset for pagination"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    },
+                                    "title": "Response List All Generations Api Loras Generations Get"
+                                }
                             }
                         }
                     },
@@ -956,73 +976,6 @@
                         "APIKeyHeader": []
                     }
                 ]
-            }
-        },
-        "/api/loras/generations": {
-            "get": {
-                "tags": [
-                    "API"
-                ],
-                "summary": "List All Generations",
-                "description": "Get all LoRA generations for the given API key.",
-                "operationId": "list_all_generations_api_loras_generations_get",
-                "security": [
-                    {
-                        "APIKeyHeader": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "description": "Number of generations to return",
-                            "default": 20,
-                            "title": "Limit"
-                        },
-                        "description": "Number of generations to return"
-                    },
-                    {
-                        "name": "offset",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "description": "Offset for pagination",
-                            "default": 0,
-                            "title": "Offset"
-                        },
-                        "description": "Offset for pagination"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object"
-                                    },
-                                    "title": "Response List All Generations Api Loras Generations Get"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
     },
