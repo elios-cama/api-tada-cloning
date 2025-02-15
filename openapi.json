@@ -267,14 +267,14 @@
                 }
             }
         },
-        "/api/voices/generations/{voice_id}": {
+        "/api/voices/{voice_id}/generations": {
             "post": {
                 "tags": [
                     "API"
                 ],
                 "summary": "Create Voice Generation",
                 "description": "Generate speech using a specific voice",
-                "operationId": "create_voice_generation_api_voices_generations__voice_id__post",
+                "operationId": "create_voice_generation_api_voices__voice_id__generations_post",
                 "security": [
                     {
                         "APIKeyHeader": []
@@ -330,7 +330,7 @@
                 ],
                 "summary": "List Voice Generations By Voice",
                 "description": "Get all generations for a specific voice",
-                "operationId": "list_voice_generations_by_voice_api_voices_generations__voice_id__get",
+                "operationId": "list_voice_generations_by_voice_api_voices__voice_id__generations_get",
                 "security": [
                     {
                         "APIKeyHeader": []
@@ -765,14 +765,14 @@
                 }
             }
         },
-        "/api/loras/generations/{upload_id}": {
+        "/api/loras/{lora_id}/generations": {
             "post": {
                 "tags": [
                     "API"
                 ],
                 "summary": "Generate Lora",
                 "description": "Generate an image using a trained LoRA model.",
-                "operationId": "generate_lora_api_loras_generations__upload_id__post",
+                "operationId": "generate_lora_api_loras__lora_id__generations_post",
                 "security": [
                     {
                         "APIKeyHeader": []
@@ -780,12 +780,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "upload_id",
+                        "name": "lora_id",
                         "in": "path",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "title": "Upload Id"
+                            "title": "Lora Id"
                         }
                     }
                 ],
@@ -805,6 +805,82 @@
                         "content": {
                             "application/json": {
                                 "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Get Lora Generations",
+                "description": "Get all generations for a specific LoRA model.",
+                "operationId": "get_lora_generations_api_loras__lora_id__generations_get",
+                "security": [
+                    {
+                        "APIKeyHeader": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "lora_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "The ID of the LoRA model",
+                            "title": "Lora Id"
+                        },
+                        "description": "The ID of the LoRA model"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "description": "Number of generations to return",
+                            "default": 20,
+                            "title": "Limit"
+                        },
+                        "description": "Number of generations to return"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "description": "Offset for pagination",
+                            "default": 0,
+                            "title": "Offset"
+                        },
+                        "description": "Offset for pagination"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    },
+                                    "title": "Response Get Lora Generations Api Loras  Lora Id  Generations Get"
+                                }
                             }
                         }
                     },
@@ -871,6 +947,57 @@
                                         "type": "object"
                                     },
                                     "title": "Response List All Generations Api Loras Generations Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/loras/generations/{generation_id}": {
+            "get": {
+                "tags": [
+                    "API"
+                ],
+                "summary": "Get Generation",
+                "description": "Get a specific generation by ID.",
+                "operationId": "get_generation_api_loras_generations__generation_id__get",
+                "security": [
+                    {
+                        "APIKeyHeader": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "generation_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "The ID of the generation",
+                            "title": "Generation Id"
+                        },
+                        "description": "The ID of the generation"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "title": "Response Get Generation Api Loras Generations  Generation Id  Get"
                                 }
                             }
                         }
