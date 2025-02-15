@@ -2,6 +2,17 @@
 
 This document provides an overview of the Ta-da API, which allows you to interact with the Ta-da AI voice cloning and image generation platform.  This API is designed for developers who want to integrate Ta-da's features into their own applications.
 
+## Base URL
+
+All API endpoints should be prefixed with the following base URL:
+```
+https://api.ta-da.io/tadzagent
+```
+
+For example, to register a new user, you would make a POST request to:
+```
+https://api.ta-da.io/tadzagent/api/users/register
+```
 ## Authentication
 
 Most API endpoints require an API key for authentication.  You can obtain an API key by registering on the Ta-da platform.  The API key should be included in the `X-API-Key` header of each request:
