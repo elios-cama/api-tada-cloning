@@ -980,6 +980,1087 @@
         }
     },
     "components": {
+        "schemas": {
+            "Body_record_phrase_voice_phrases__user_id___phrase_id__record_post": {
+                "properties": {
+                    "audio_file": {
+                        "type": "string",
+                        "format": "binary",
+                        "title": "Audio File"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "audio_file"
+                ],
+                "title": "Body_record_phrase_voice_phrases__user_id___phrase_id__record_post"
+            },
+            "Body_upload_avatar_avatar_upload__user_id__post": {
+                "properties": {
+                    "image_file": {
+                        "type": "string",
+                        "format": "binary",
+                        "title": "Image File"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "image_file"
+                ],
+                "title": "Body_upload_avatar_avatar_upload__user_id__post"
+            },
+            "Body_upload_training_data_lora_upload__user_id__post": {
+                "properties": {
+                    "zip_file": {
+                        "type": "string",
+                        "format": "binary",
+                        "title": "Zip File"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "zip_file"
+                ],
+                "title": "Body_upload_training_data_lora_upload__user_id__post"
+            },
+            "CreditPackageResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "credits": {
+                        "type": "integer",
+                        "title": "Credits"
+                    },
+                    "price_sol": {
+                        "type": "number",
+                        "title": "Price Sol"
+                    },
+                    "bonus_percentage": {
+                        "type": "integer",
+                        "title": "Bonus Percentage"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "credits",
+                    "price_sol",
+                    "bonus_percentage"
+                ],
+                "title": "CreditPackageResponse"
+            },
+            "GenerateLoraRequest": {
+                "properties": {
+                    "prompt": {
+                        "type": "string",
+                        "title": "Prompt"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "prompt"
+                ],
+                "title": "GenerateLoraRequest"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "LoraTraining": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "upload_id": {
+                        "type": "string",
+                        "title": "Upload Id"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Status"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "title": "Updated At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "upload_id",
+                    "status",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "LoraTraining"
+            },
+            "LoraUpload": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "title": "Created At"
+                    },
+                    "trigger_word": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Trigger Word"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "created_at",
+                    "trigger_word"
+                ],
+                "title": "LoraUpload"
+            },
+            "PudgyGenerationRequest": {
+                "properties": {
+                    "prompt": {
+                        "type": "string",
+                        "title": "Prompt"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "prompt"
+                ],
+                "title": "PudgyGenerationRequest"
+            },
+            "ReplicateHardware": {
+                "type": "string",
+                "enum": [
+                    "cpu",
+                    "gpu-t4",
+                    "gpu-l40s",
+                    "gpu-a100-large"
+                ],
+                "title": "ReplicateHardware"
+            },
+            "ReplicateModelCreate": {
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "title": "User Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_id"
+                ],
+                "title": "ReplicateModelCreate"
+            },
+            "ReplicateModelResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "user_id": {
+                        "type": "string",
+                        "title": "User Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "replicate_owner": {
+                        "type": "string",
+                        "title": "Replicate Owner"
+                    },
+                    "replicate_name": {
+                        "type": "string",
+                        "title": "Replicate Name"
+                    },
+                    "replicate_url": {
+                        "type": "string",
+                        "title": "Replicate Url"
+                    },
+                    "visibility": {
+                        "$ref": "#/components/schemas/ReplicateModelVisibility"
+                    },
+                    "hardware": {
+                        "$ref": "#/components/schemas/ReplicateHardware"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Updated At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "user_id",
+                    "name",
+                    "replicate_owner",
+                    "replicate_name",
+                    "replicate_url",
+                    "visibility",
+                    "hardware",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "ReplicateModelResponse"
+            },
+            "ReplicateModelVisibility": {
+                "type": "string",
+                "enum": [
+                    "public",
+                    "private"
+                ],
+                "title": "ReplicateModelVisibility"
+            },
+            "TadzGenerationRequest": {
+                "properties": {
+                    "prompt": {
+                        "type": "string",
+                        "title": "Prompt"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "prompt"
+                ],
+                "title": "TadzGenerationRequest"
+            },
+            "UserDetailResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid4",
+                        "title": "Id"
+                    },
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    },
+                    "referral_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Referral Code"
+                    },
+                    "code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Code"
+                    },
+                    "onboarding_completed": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Onboarding Completed",
+                        "default": false
+                    },
+                    "avatar_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Avatar Url"
+                    },
+                    "wallets": {
+                        "items": {
+                            "$ref": "#/components/schemas/WalletInfo"
+                        },
+                        "type": "array",
+                        "title": "Wallets",
+                        "default": []
+                    },
+                    "points": {
+                        "type": "number",
+                        "title": "Points",
+                        "default": 0.0
+                    },
+                    "points_multiplier": {
+                        "type": "number",
+                        "title": "Points Multiplier",
+                        "default": 1.0
+                    },
+                    "points_per_second": {
+                        "type": "number",
+                        "title": "Points Per Second",
+                        "default": 1.0
+                    },
+                    "friends_referred": {
+                        "type": "integer",
+                        "title": "Friends Referred",
+                        "default": 0
+                    },
+                    "voice_clone": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/VoiceCloneInfo"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "twitter_handle": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Twitter Handle"
+                    },
+                    "twitter_connected": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Twitter Connected",
+                        "default": false
+                    },
+                    "twitter_details": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Twitter Details"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "username",
+                    "created_at"
+                ],
+                "title": "UserDetailResponse"
+            },
+            "UserLabFeatures": {
+                "properties": {
+                    "voice_clone": {
+                        "type": "boolean",
+                        "title": "Voice Clone"
+                    },
+                    "avatar": {
+                        "type": "boolean",
+                        "title": "Avatar"
+                    },
+                    "lora": {
+                        "type": "boolean",
+                        "title": "Lora"
+                    },
+                    "personality": {
+                        "type": "boolean",
+                        "title": "Personality"
+                    },
+                    "memory": {
+                        "type": "boolean",
+                        "title": "Memory"
+                    },
+                    "interaction": {
+                        "type": "boolean",
+                        "title": "Interaction"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "voice_clone",
+                    "avatar",
+                    "lora",
+                    "personality",
+                    "memory",
+                    "interaction"
+                ],
+                "title": "UserLabFeatures"
+            },
+            "UserResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid4",
+                        "title": "Id"
+                    },
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    },
+                    "referral_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Referral Code"
+                    },
+                    "onboarding_completed": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Onboarding Completed"
+                    },
+                    "avatar_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Avatar Url"
+                    },
+                    "is_new": {
+                        "type": "boolean",
+                        "title": "Is New",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "username",
+                    "created_at",
+                    "referral_code",
+                    "onboarding_completed"
+                ],
+                "title": "UserResponse"
+            },
+            "UserUpdate": {
+                "properties": {
+                    "username": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Username"
+                    },
+                    "referral_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Referral Code"
+                    },
+                    "onboarding_completed": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Onboarding Completed"
+                    },
+                    "avatar_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Avatar Url"
+                    }
+                },
+                "type": "object",
+                "title": "UserUpdate"
+            },
+            "UserUpdateResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid4",
+                        "title": "Id"
+                    },
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "referral_code": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Referral Code"
+                    },
+                    "onboarding_completed": {
+                        "type": "boolean",
+                        "title": "Onboarding Completed"
+                    },
+                    "avatar_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Avatar Url"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "username",
+                    "referral_code",
+                    "onboarding_completed",
+                    "created_at"
+                ],
+                "title": "UserUpdateResponse"
+            },
+            "UserVoicePhrase": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "user_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "User Id"
+                    },
+                    "phrase_id": {
+                        "type": "integer",
+                        "title": "Phrase Id"
+                    },
+                    "recording_url": {
+                        "type": "string",
+                        "title": "Recording Url"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Status"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Updated At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "user_id",
+                    "phrase_id",
+                    "recording_url",
+                    "status",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "UserVoicePhrase"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            },
+            "VerifyPurchaseRequest": {
+                "properties": {
+                    "transaction_hash": {
+                        "type": "string",
+                        "title": "Transaction Hash"
+                    },
+                    "package_id": {
+                        "type": "string",
+                        "title": "Package Id"
+                    },
+                    "wallet_address": {
+                        "type": "string",
+                        "title": "Wallet Address"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "transaction_hash",
+                    "package_id",
+                    "wallet_address"
+                ],
+                "title": "VerifyPurchaseRequest"
+            },
+            "VoiceClone": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "title": "Created At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "created_at"
+                ],
+                "title": "VoiceClone"
+            },
+            "VoiceCloneInfo": {
+                "properties": {
+                    "has_clone": {
+                        "type": "boolean",
+                        "title": "Has Clone"
+                    },
+                    "voice_id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Voice Id"
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "created_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "has_clone"
+                ],
+                "title": "VoiceCloneInfo"
+            },
+            "VoiceCloneRequest": {
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "User Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_id",
+                    "name"
+                ],
+                "title": "VoiceCloneRequest"
+            },
+            "VoiceCloneResponse": {
+                "properties": {
+                    "voice_id": {
+                        "type": "string",
+                        "title": "Voice Id"
+                    },
+                    "requires_verification": {
+                        "type": "boolean",
+                        "title": "Requires Verification"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "voice_id",
+                    "requires_verification"
+                ],
+                "title": "VoiceCloneResponse"
+            },
+            "VoiceGeneration": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "voice_id": {
+                        "type": "string",
+                        "title": "Voice Id"
+                    },
+                    "text": {
+                        "type": "string",
+                        "title": "Text"
+                    },
+                    "audio_url": {
+                        "type": "string",
+                        "title": "Audio Url"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "title": "Created At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "voice_id",
+                    "text",
+                    "audio_url",
+                    "created_at"
+                ],
+                "title": "VoiceGeneration"
+            },
+            "VoiceGenerationList": {
+                "properties": {
+                    "generations": {
+                        "items": {
+                            "$ref": "#/components/schemas/VoiceGeneration"
+                        },
+                        "type": "array",
+                        "title": "Generations"
+                    },
+                    "total": {
+                        "type": "integer",
+                        "title": "Total"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "title": "Limit"
+                    },
+                    "offset": {
+                        "type": "integer",
+                        "title": "Offset"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "generations",
+                    "total",
+                    "limit",
+                    "offset"
+                ],
+                "title": "VoiceGenerationList"
+            },
+            "VoiceGenerationRequest": {
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "title": "Text"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "text"
+                ],
+                "title": "VoiceGenerationRequest"
+            },
+            "VoiceGenerationResponse": {
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "title": "Url"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "url"
+                ],
+                "title": "VoiceGenerationResponse"
+            },
+            "VoicePhrase": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "text": {
+                        "type": "string",
+                        "title": "Text"
+                    },
+                    "phrase_order": {
+                        "type": "integer",
+                        "title": "Phrase Order"
+                    },
+                    "is_active": {
+                        "type": "boolean",
+                        "title": "Is Active"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "text",
+                    "phrase_order",
+                    "is_active",
+                    "created_at"
+                ],
+                "title": "VoicePhrase"
+            },
+            "VoiceUpload": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "title": "Created At"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Status"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "created_at",
+                    "status"
+                ],
+                "title": "VoiceUpload"
+            },
+            "WalletAdd": {
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "User Id"
+                    },
+                    "address": {
+                        "type": "string",
+                        "title": "Address"
+                    },
+                    "signature": {
+                        "type": "string",
+                        "title": "Signature"
+                    },
+                    "signed_message": {
+                        "type": "string",
+                        "title": "Signed Message"
+                    },
+                    "chain": {
+                        "type": "string",
+                        "title": "Chain"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_id",
+                    "address",
+                    "signature",
+                    "signed_message",
+                    "chain"
+                ],
+                "title": "WalletAdd"
+            },
+            "WalletInfo": {
+                "properties": {
+                    "address": {
+                        "type": "string",
+                        "title": "Address"
+                    },
+                    "chain": {
+                        "type": "string",
+                        "title": "Chain"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "address",
+                    "chain"
+                ],
+                "title": "WalletInfo"
+            },
+            "WalletResponse": {
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "User Id"
+                    },
+                    "address": {
+                        "type": "string",
+                        "title": "Address"
+                    },
+                    "chain": {
+                        "type": "string",
+                        "title": "Chain"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Status"
+                    },
+                    "data": {
+                        "type": "object",
+                        "title": "Data"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_id",
+                    "address",
+                    "chain",
+                    "status",
+                    "data"
+                ],
+                "title": "WalletResponse"
+            }
+        },
         "securitySchemes": {
             "APIKeyHeader": {
                 "type": "apiKey",
